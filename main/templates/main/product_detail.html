@@ -1,0 +1,275 @@
+<DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+
+    <style>
+        .dropbtn {
+            color:#555;
+            background-color: transparent;
+            #padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products| RedStore</title>
+    <link rel="stylesheet" href="{% static 'css/main.css'%}"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'store' %}"><img src="{% static 'images/FABRIC_STORE.png' %}" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="{% url 'store' %}">Home</a></li>
+                        
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Products</button>
+                            <div class="dropdown-content">
+                                <a href="{% url 'product' 'cotton' %}">Cotton Handloom</a>
+                                <a href="{% url 'product' 'jute' %}">Jute</a>
+                                <a href="{% url 'product' 'viscose' %}">Viscose</a>
+                                <a href="{% url 'product' 'cotrey' %}">Cotrey</a>
+                                <a href="{% url 'product' 'linen' %}">Linen</a>
+                                <a href="{% url 'product' 'silk' %}">Silk</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="{% url 'about-us' %}">About</a></li>
+                    <li><a href="{% url 'contact_us' %}">Contacts</a></li>
+                    {% if  user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart_img.png' %}" width="30px" height="30px"></a>
+            {% if  user.is_authenticated %}
+                <p id="cart-total"> {{cartItems}} </p>
+            {% endif %}
+            <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+    <!----------single product details-------->
+
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src= "{{product.imageURL}}" width="80%" id="ProductImg">
+            
+                <div class="small-img-row">
+                    <div class="small-img-col">
+                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2" >
+                <p>Home / {{product.category| capfirst}}</p>
+                <h1> {{product.name| capfirst}} </h1>
+                <h3> Color: </h3><h4>{{product.color }} </h4> 
+                <h3> Width: </h3><h4>{{product.width|floatformat:2 }}" </h4> 
+                <h3> Price: </h3> <h4>&#8377;{{product.price| floatformat:2}}</h4>
+                <input type="number" placeholder="Quantity" id="quantity" >
+                <button data-product={{product.id}}  data-action="add" id='update-cart' class="btn btn-outline-secondary add-btn update-cart"> Add to Cart</button>
+                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <br>
+                <p>Give your summer wardrobe a style upgrade with the HRX Men's active T-Shirt. Team it with a pair of shorts with your morning workout or a denims for an evening out with the guys.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!----------title---------->
+
+
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+            <p>View More</p>
+        </div>
+    </div>
+
+
+    <!-------------Products---------------->
+    <div class="small-container">
+
+        <div class="row">
+            {% csrf_token %}
+            {% for allproduct in allproducts %}
+            {% ifequal product.category allproduct.category %}
+            {% ifnotequal product.id allproduct.id%}
+            
+            <div class="col-4">
+                <a href='{% url 'product_detail' allproduct.id allproduct.name %}'><img src="{{allproduct.imageURL}}"></a>
+                <h4><strong>{{allproduct.name}}</strong></h4>
+                <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
+                                
+                <p><strong>Rate:&nbsp; &#8377; {{product.price| floatformat:2}}/m </strong> </p>
+                
+            </div>
+            {% endifnotequal %}
+            {% endifequal %}
+                
+            {% endfor %}
+        </div>
+       
+    </div>
+
+    <!--------------footer-------------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3> Download Our App</h3>
+                    <p>Download App for Android and IOS Smartphones.</p>
+                    <div class="app-logo">
+                        <img src="{% static 'images/play-store.png' %}">
+                        <img src="{% static 'images/app-store.png' %}">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="{% static 'images/Fabric_Store2.jfif' %}">
+                    <p>Our Purpose is to sustainability make te pleasure and benefits of sports accessible to many as possible.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3> Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3> Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2020 -Naman Gupta</p>
+        </div>
+    </div>
+    <!-----------toggle menu---------->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        
+        MenuItems.style.maxHeight = "0px";
+        
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px"){
+                MenuItems.style.maxHeight = "200px";
+            }
+            else{
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+
+
+<!-------------js for product  gallery-------->
+    
+
+    <script type='text/javascript' src='{% static 'js/cart.js' %}'></script>
+
+    <script>
+        var user='{{request.user}}'
+
+
+        function getToken(name){
+            var cookieValue=null;
+            if(document.cookie && document.cookie !== ''){
+                var cookies=document.cookie.split(';');
+                for(var i=0;i<cookies.length;i++){
+                    var cookie= cookies[i].trim();
+                    if(cookie.substring(0, name.length+1)===(name + '=')){
+                        cookieValue=decodeURIComponent(cookie.substring(name.length+1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken=getToken('csrftoken');
+
+
+
+
+        var ProductImg = document.getElementById("ProductImg");
+        var SmallImg = document.getElementsByClassName("small-img");
+        SmallImg[0].onclick = function(){
+            ProductImg.src = SmallImg[0].src;
+        }
+        SmallImg[1].onclick = function(){
+            ProductImg.src = SmallImg[1].src;
+        }
+        SmallImg[2].onclick = function(){
+            ProductImg.src = SmallImg[2].src;
+        }
+        SmallImg[3].onclick = function(){
+            ProductImg.src = SmallImg[3].src;
+        }
+    </script>
+    
+
+
+</body>
+{% endblock content %}
+</html>

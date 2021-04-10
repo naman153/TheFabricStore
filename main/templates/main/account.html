@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+
+    <style>
+        .dropbtn {
+            color:#555;
+            background-color: transparent;
+            #padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> All Products| RedStore </title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'store' %}"><img src="{% static 'images/FABRIC_STORE.png' %}" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="{% url 'store' %}">Home</a></li>
+                        
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Products</button>
+                            <div class="dropdown-content">
+                                <a href="{% url 'product' 'cotton' %}">Cotton Handloom</a>
+                                <a href="{% url 'product' 'jute' %}">Jute</a>
+                                <a href="{% url 'product' 'viscose' %}">Viscose</a>
+                                <a href="{% url 'product' 'cotrey' %}">Cotrey</a>
+                                <a href="{% url 'product' 'linen' %}">Linen</a>
+                                <a href="{% url 'product' 'silk' %}">Silk</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="{% url 'about-us' %}">About</a></li>
+                    <li><a href="{% url 'contact_us' %}">Contacts</a></li>
+                    {% if  user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart_img.png' %}" width="40px" height="40px"></a>
+            {% if  user.is_authenticated %}
+                    <p id="cart-total"> {{cartItems}} </p>
+                {% endif %}
+            <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{% static 'images/banner3.jpg' %}">
+                </div>
+                <div class="col-2">
+                    <div class="form-container" style="height:450px">
+                        <div class="form-btn">
+                            <span onclick="register()">Register</span>
+                            <hr id="Indicator">
+                        </div>
+
+                        <form id="RegForm" method="POST">
+                            {% csrf_token %}
+                            <input type="text" placeholder="First Name" name="first_name">
+                            <input type="text" placeholder="Last Name" name="last_name">
+                            <input type="text" placeholder="Username" name="username">
+                            <input type="email" placeholder="Email" name="email_address">
+                            <input type="password" placeholder="Password" name="password">
+                            <button type="submit" class="btn">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+
+    <!--------------footer-------------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3> Download Our App</h3>
+                    <p>Download App for Android and IOS Smartphones.</p>
+                    <div class="app-logo">
+                        <img src="{% static 'images/play-store.png' %}">
+                        <img src="{% static 'images/app-store.png' %}">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="{% static 'images/Fabric_Store2.jfif' %}">
+                    <p>Our Purpose is to sustainability make te pleasure and benefits of sports accessible to many as possible.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3> Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3> Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2020 -Naman Gupta</p>
+        </div>
+    </div>
+    <!-----------toggle menu---------->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        
+        MenuItems.style.maxHeight = "0px";
+        
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px"){
+                MenuItems.style.maxHeight = "200px";
+            }
+            else{
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+<!------------toggle form js---------->
+
+<script>
+    
+    var RegForm = document.getElementById("RegForm");
+    var Indicator = document.getElementById("Indicator");
+
+    
+    RegForm.style.transform = "translateX(0px)";
+    Indicator.style.transform = "translateX(0px)";
+
+</script>
+
+
+
+</body>
+{% endblock content %}
+</html>
