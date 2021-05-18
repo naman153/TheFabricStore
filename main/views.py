@@ -99,7 +99,7 @@ def product(request, slug):
 
 
 def login(request):
-	if request.method== "POST":
+	if request.method == "POST":
 		username1 = request.POST['username']
 		password1 = request.POST['password']
 		x=auth.authenticate(username=username1, password=password1)
