@@ -87,7 +87,7 @@
             {% if  user.is_authenticated %}
                 <p id="cart-total"> {{cartItems}} </p>
             {% endif %}
-            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            <img src="{%static 'images/menu.jpg' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
 
@@ -108,7 +108,7 @@
                 <tr>
                     <td>
                         <div class="cart-info">
-                            <img src={{item.product.imageURL}}>
+                            <img src=http://the-fabric-store.herokuapp.com/media/{{item.product.image}}>
                             <div>
                                 <p>{{item.product.name}}</p>
                                 <small>Price: &#8377;{{item.product.price| floatformat:2}}/m</small>

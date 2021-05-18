@@ -96,20 +96,20 @@
     <div class="small-container">
         <div class="row">
             <div class="col-2">
-                <img src= "{{product.imageURL}}" width="80%" id="ProductImg">
+                <img src= "http://the-fabric-store.herokuapp.com/media/{{product.image}}" width="80%" id="ProductImg">
             
                 <div class="small-img-row">
                     <div class="small-img-col">
-                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                        <img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" width="70%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                        <img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" width="70%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                        <img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" width="70%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{product.imageURL}}" width="70%" class="small-img">
+                        <img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" width="70%" class="small-img">
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
             {% ifnotequal product.id allproduct.id%}
             
             <div class="col-4">
-                <a href='{% url 'product_detail' allproduct.id allproduct.name %}'><img src="{{allproduct.imageURL}}"></a>
+                <a href='{% url 'product_detail' allproduct.id allproduct.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{allproduct.image}}"></a>
                 <h4><strong>{{allproduct.name}}</strong></h4>
                 <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
