@@ -189,7 +189,7 @@
                     {% ifequal product.category 'cotton' %}
                 
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="{{product.imageURL}}"></a>
+                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
