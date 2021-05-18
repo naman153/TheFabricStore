@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'main.apps.MainConfig',
 ]
+heroku config:set DISABLE_COLLECTSTATIC=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
