@@ -29,7 +29,7 @@ SECRET_KEY = 'ck1ges)hqqphc!adc97r#ghdf31z=ek%=xt8a18u_4)($13%ew'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','the-fabric-store.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','www.the-fabric-store.com']
 
 # Application definition
 
