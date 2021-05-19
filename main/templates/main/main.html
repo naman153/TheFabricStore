@@ -235,8 +235,8 @@
                 {% for product in products %}
                     {% ifequal product.category 'viscose' %}
                         <div class="col-4">
-                            <a href="{% url 'product_detail' {{product.id}} {{product.name}} %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" class="details" data-product={{product.id}} data-action="add" ></a>
-                            <h4><strong> {{product.name}} </strong></h4>
+                            <img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" class="details" data-product={{product.id}} data-action="add" >
+                            <a href="{% url 'product_detail' product.id product.name %}"></a><h4><strong> {{product.name}} </strong></h4></a>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
                             <p><strong>Rate:&nbsp; &#8377; {{product.price| floatformat:2}}/m </strong> </p>
