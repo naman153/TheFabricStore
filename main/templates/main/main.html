@@ -189,7 +189,7 @@
                     {% ifequal product.category 'cotton' %}
                 
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
@@ -214,7 +214,7 @@
                 {% for product in products %}
                     {% ifequal product.category  'jute' %}
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
@@ -235,7 +235,7 @@
                 {% for product in products %}
                     {% ifequal product.category 'viscose' %}
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" class="details" data-product={{product.id}} data-action="add" ></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}" class="details" data-product={{product.id}} data-action="add" ></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
@@ -258,7 +258,7 @@
                 {% for product in products %}
                     {% ifequal product.category 'cotrey' %}
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
@@ -280,7 +280,7 @@
                 {% for product in products %}
                     {% ifequal product.category 'linen' %}
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
@@ -302,7 +302,7 @@
                 {% for product in products %}
                     {% ifequal product.category 'silk' %}
                         <div class="col-4">
-                            <a href='{% url 'product_detail' product.id product.name %}'><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
+                            <a href="{% url 'product_detail' product.id product.name %}"><img src="http://the-fabric-store.herokuapp.com/media/{{product.image}}"></a>
                             <h4><strong> {{product.name}} </strong></h4>
                             <p> <strong>Width:</strong> {{product.width}}"  &nbsp; &nbsp; <strong>Color: </strong>{{product.color}} </p>
                                 
