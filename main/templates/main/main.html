@@ -320,23 +320,7 @@
 
     </div>
 
-    <!-- Offers
-    <div class="offer">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-2">
-                    <img src="images/exclusive.png" class="offer-img">
-                </div>
-                <div class="col-2">
-                    <p>Exclusively Available on RedStore</p>
-                    <h1>Smart Band 4</h1>
-                    <small>The MI band 4 features a 39.9% larger (than the Smart Band 3) AMOLED color full-touch display with adjustable brightness, so everything is clear as can be. </small>
-                    <br>
-                    <a href="" class="btn">Buy Now &#8594;</a>
-                </div>
-            </div>
-        </div>
-    </div>   -->
+    
 
 
     <!----------Testimonial---------->
@@ -366,7 +350,7 @@
                         {% endfor%}
                         
                     </div>
-                    <img src="{{feed.imageURL}}">
+                    <img src="http://the-fabric-store.herokuapp.com/media/{feed.image}">
                     <h3>{{feed.name}}</h3>
                 </div>
                 {% endfor %}
@@ -426,7 +410,7 @@
                 <div class="footer-col-4">
                     <h3> Follow Us</h3>
                     <ul>
-                        <a href="https://api.whatsapp.com/send?phone=+91 93105 75301&text=%20My%20order%20is%20completed%20successfully.%0aTransactionId:%20{{order.transaction}}%0aI%20want%20to%20track%20my%20order%20and%20my%20queries%20are:%0a"><li>Facebook</li><a>
+                        <li>Facebook</li>
                         <li>Twitter</li>
                         <li>Instagram</li>
                         <li>Youtube</li>
